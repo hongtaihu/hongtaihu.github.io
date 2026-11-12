@@ -1,0 +1,10 @@
+/* Preserve the Academic Pages theme, masthead, and author sidebar. */
+.profile-cv .cv-entry{margin-bottom:1.1em}
+.profile-cv .cv-entry-heading{display:flex;justify-content:space-between;align-items:baseline;gap:1.2em}
+.profile-cv .cv-date{font-size:.8em;white-space:nowrap;color:#666}
+.profile-cv .cv-entry p{margin:.25em 0 .6em}
+.profile-cv .cv-context,.profile-cv .cv-reports{font-size:.9em}
+.profile-cv .cv-note{font-size:.75em;color:#666;line-height:1.5}
+.profile-cv ul{margin-top:.35em}
+.profile-cv li+li{margin-top:.2em}
+@media(max-width:720px){.profile-cv .cv-entry-heading{display:block}.profile-cv .cv-date{display:block;margin-top:.15em;white-space:normal}}

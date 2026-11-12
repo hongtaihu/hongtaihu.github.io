@@ -1,0 +1,113 @@
+{
+  "name": "Hongtai Hu",
+  "nameChinese": "胡弘泰",
+  "email": "13541229370a@gmail.com",
+  "github": "https://github.com/hongtaihu",
+  "handle": "hongtaihu",
+  "headline": "Exploring the reliability of compilers and developer tools.",
+  "intro": "I am a master's student in Computer Science and Technology at Xiamen University. My interests lie in software engineering, fuzzing, compilers, and systems programming.",
+  "researchIntro": "I study how language servers behave when source code, requests, or execution conditions push them beyond the ordinary. My work turns crashes into small, reproducible reports that upstream developers can act on.",
+  "verifiedDate": "2026-11-12",
+  "verifiedDateDisplay": "November 12, 2026",
+  "llvmReportsWithMergedFixes": 36,
+  "llvmOwnMergedFixes": 3,
+  "otherReportsWithMergedFixes": 3,
+  "education": [
+    {
+      "school": "Xiamen University",
+      "schoolShort": "XMU",
+      "degree": "Master's student",
+      "major": "Computer Science and Technology",
+      "start": "2026",
+      "end": "2029",
+      "period": "Sep 2026 — Jul 2029 (expected)",
+      "current": true
+    },
+    {
+      "school": "Nanjing University of Aeronautics and Astronautics",
+      "schoolShort": "NUAA",
+      "degree": "Bachelor of Engineering",
+      "major": "Information Security",
+      "start": "2022",
+      "end": "2026",
+      "period": "Sep 2022 — Jun 2026",
+      "current": false
+    }
+  ],
+  "honors": [
+    {"title": "ICPC Asia Regional Contests", "detail": "Silver medals · Xi'an and Shanghai", "year": "2025", "type": "silver"},
+    {"title": "ICPC Asia Regional Contests", "detail": "Bronze medals · Hangzhou and Kunming", "year": "2024", "type": "bronze"},
+    {"title": "CCF Outstanding Undergraduate Student Program", "detail": "Selected · China Computer Federation", "year": "2025", "type": "ccf", "url": "https://www.ccf.org.cn/Awards/Awards/2025-08-04/847062.shtml"}
+  ],
+  "scholarships": [],
+  "fuzz": {
+    "title": "Fuzzing language servers",
+    "cvTitle": "Language Server Fuzzing & Defect Discovery",
+    "context": "Undergraduate thesis research",
+    "period": "Oct 2025 — Jun 2026",
+    "tools": ["Rust", "LibAFL", "LSPFuzz", "LiteLLM"],
+    "targets": ["Clang / clangd", "ZLS", "rust-analyzer", "Sorbet"],
+    "description": "Building on LSPFuzz (ASE 2025), I extended the testing workflow and explored LLM-generated, semantics-aware mutators. I investigated failures across source inputs, LSP request sequences, and server lifecycle boundaries.",
+    "steps": [
+      {"title": "Find", "description": "Exercise language servers with mutated source code and LSP request sequences."},
+      {"title": "Reduce", "description": "Minimize inputs and requests while preserving the original failure."},
+      {"title": "Investigate", "description": "Inspect crash traces, compare versions, and prepare reproducible evidence."},
+      {"title": "Follow through", "description": "Report upstream and help clarify, reproduce, and track the resulting fixes."}
+    ],
+    "cvBullets": [
+      "Extended an existing LSPFuzz-based testing workflow using Rust, LibAFL, and LLM-generated, semantics-aware mutators via LiteLLM.",
+      "Tested Clang/clangd, ZLS, rust-analyzer, and Sorbet; minimized source inputs and LSP sequences, and prepared crash traces and cross-version reproduction evidence.",
+      "At least 36 LLVM reports have corresponding merged fixes, including 3 patches submitted by me. A further 3 reports have merged fixes in ZLS (1) and Sorbet (2)."
+    ]
+  },
+  "cases": [
+    {
+      "project": "clangd",
+      "category": "Server lifecycle",
+      "title": "A rename request outlives the server",
+      "description": "A pending rename task could access server state during shutdown and trigger an assertion. The upstream fix also covered an in-flight tweak command.",
+      "issueNumber": "196225",
+      "issueUrl": "https://github.com/llvm/llvm-project/issues/196225",
+      "fixNumber": "198019",
+      "fixUrl": "https://github.com/llvm/llvm-project/pull/198019",
+      "mergedDate": "May 2026"
+    },
+    {
+      "project": "Clang / clangd",
+      "category": "Memory safety",
+      "title": "A template annotation outlives its storage",
+      "description": "A template-id declarator combined with a lambda default argument exposed a use-after-free in template annotation handling.",
+      "issueNumber": "196725",
+      "issueUrl": "https://github.com/llvm/llvm-project/issues/196725",
+      "fixNumber": "196788",
+      "fixUrl": "https://github.com/llvm/llvm-project/pull/196788",
+      "mergedDate": "May 2026"
+    },
+    {
+      "project": "ZLS",
+      "category": "Malformed source",
+      "title": "An invalid declaration crashes selection ranges",
+      "description": "Requesting selection ranges for a malformed variadic function declaration caused ZLS to unwrap a missing value and panic.",
+      "issueNumber": "3206",
+      "issueUrl": "https://github.com/zigtools/zls/issues/3206",
+      "fixNumber": "3207",
+      "fixUrl": "https://github.com/zigtools/zls/pull/3207",
+      "mergedDate": "May 2026"
+    }
+  ],
+  "emulator": {
+    "title": "A RISC-V 32-bit emulator",
+    "period": "Jan — Jun 2025",
+    "cvPeriod": "Jan 2025 — Jun 2025",
+    "context": "Computer systems course project",
+    "description": "Implemented instruction decoding, CPU execution, device models, and exception handling. Ran The Legend of Sword and Fairy on the emulator to exercise the system.",
+    "tools": ["C / C++", "Computer architecture"]
+  },
+  "teaching": [
+    {"title": "Teaching Assistant · C Programming", "period": "Sep 2023 — Jan 2024", "description": "Supported teaching, prepared assignment questions, and helped students with debugging and exam preparation."},
+    {"title": "Peer Instructor · Student Academic Support", "period": "Sep 2023 — Jun 2024", "description": "Led review sessions in C++, data structures, and algorithms, covering tree traversals, shortest paths, and dynamic programming."}
+  ],
+  "languages": ["C / C++", "Rust", "Python", "Java"],
+  "cvLanguages": "C/C++; experience with Rust, Python, and Java.",
+  "interests": ["Software engineering", "Fuzzing", "Compilers", "Systems programming"]
+}

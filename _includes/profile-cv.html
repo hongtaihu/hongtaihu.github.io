@@ -1,0 +1,50 @@
+{% assign cv = site.data.profile %}
+<div class="profile-cv">
+  <h2 id="education">Education</h2>
+  {% for e in cv.education %}
+  <div class="cv-entry">
+    <div class="cv-entry-heading"><strong>{{ e.school | escape }}</strong><span class="cv-date">{{ e.period | escape }}</span></div>
+    <p>{{ e.degree | escape }} · {{ e.major | escape }}</p>
+  </div>
+  {% endfor %}
+
+  <h2 id="honors">Honors &amp; Awards</h2>
+  {% for a in cv.honors %}
+  <div class="cv-entry">
+    <div class="cv-entry-heading"><strong>{{ a.title | escape }}</strong><span class="cv-date">{{ a.year | escape }}</span></div>
+    <p>{{ a.detail | escape }}{% if a.url %} · <a href="{{ a.url | escape }}">Announcement</a>{% endif %}</p>
+  </div>
+  {% endfor %}
+
+  {% if cv.scholarships.size > 0 %}
+  <h2 id="scholarships">Scholarships</h2>
+  {% for s in cv.scholarships %}<div class="cv-entry-heading cv-entry"><strong>{{ s.title | escape }}</strong><span class="cv-date">{{ s.year | escape }}</span></div>{% endfor %}
+  {% endif %}
+
+  <h2 id="projects">Selected Projects</h2>
+  <div class="cv-entry">
+    <div class="cv-entry-heading"><strong>{{ cv.fuzz.cvTitle | escape }}</strong><span class="cv-date">{{ cv.fuzz.period | escape }}</span></div>
+    <p class="cv-context">{{ cv.fuzz.context | escape }} · {{ cv.fuzz.tools | join: ' / ' | escape }}</p>
+    <ul>{% for bullet in cv.fuzz.cvBullets %}<li>{{ bullet | escape }}</li>{% endfor %}</ul>
+    <p class="cv-context">Selected reports:</p>
+    <ul class="cv-reports">{% for c in cv.cases %}<li><a href="{{ c.issueUrl | escape }}">{{ c.project | escape }}: {{ c.title | escape }}</a> · <a href="{{ c.fixUrl | escape }}">Merged fix #{{ c.fixNumber | escape }}</a></li>{% endfor %}</ul>
+    <p class="cv-note">Fix status verified on {{ cv.verifiedDate | escape }}; includes upstream merges after the thesis period. AI assistance was used in investigation and implementation.</p>
+  </div>
+  <div class="cv-entry">
+    <div class="cv-entry-heading"><strong>{{ cv.emulator.title | escape }}</strong><span class="cv-date">{{ cv.emulator.cvPeriod | escape }}</span></div>
+    <p class="cv-context">{{ cv.emulator.context | escape }}</p>
+    <ul><li>{{ cv.emulator.description | escape }}</li></ul>
+  </div>
+
+  <h2 id="teaching">Teaching &amp; Academic Support</h2>
+  {% for t in cv.teaching %}
+  <div class="cv-entry">
+    <div class="cv-entry-heading"><strong>{{ t.title | escape }}</strong><span class="cv-date">{{ t.period | escape }}</span></div>
+    <p>{{ t.description | escape }}</p>
+  </div>
+  {% endfor %}
+
+  <h2 id="skills">Skills &amp; Interests</h2>
+  <p><strong>Languages:</strong> {{ cv.cvLanguages | escape }}<br /><strong>Interests:</strong> {{ cv.interests | join: '; ' | escape }}.</p>
+  <p class="cv-note">Last updated: {{ cv.verifiedDateDisplay | escape }}.</p>
+</div>

@@ -1,0 +1,47 @@
+name: Update Typst CV
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - _data/profile.json
+      - resume/**
+      - .github/workflows/update-cv.yml
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: update-personal-cv
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+      - name: Install Typst 0.15.1
+        run: |
+          curl --fail --location --retry 3 https://github.com/typst/typst/releases/download/v0.15.1/typst-x86_64-unknown-linux-musl.tar.xz -o "$RUNNER_TEMP/typst.tar.xz"
+          tar -xf "$RUNNER_TEMP/typst.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+      - name: Compile the English CV
+        run: typst compile --root . --font-path resume/fonts resume/cv.typ files/hongtai-hu-cv.pdf
+      - name: Save an updated PDF
+        run: |
+          if git diff --quiet -- files/hongtai-hu-cv.pdf; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add files/hongtai-hu-cv.pdf
+          git commit -m "Update generated English CV"
+          git push origin HEAD:master
+      - name: Rebuild GitHub Pages with the current PDF
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
